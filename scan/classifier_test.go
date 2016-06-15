@@ -54,9 +54,9 @@ func classifierProgram() *loader.Program {
 	var ldr loader.Config
 	ldr.ParserMode = goparser.ParseComments
 	ldr.Build = &gobuild.Default
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/classification")
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/classification/models")
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/classification/operations")
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/classification")
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/classification/models")
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/classification/operations")
 	prog, err := ldr.Load()
 	if err != nil {
 		log.Fatal(err)
@@ -68,9 +68,9 @@ func petstoreProgram() *loader.Program {
 	var ldr loader.Config
 	ldr.ParserMode = goparser.ParseComments
 	ldr.Build = &gobuild.Default
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/petstore")
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/petstore/models")
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/petstore/rest/handlers")
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/petstore")
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/petstore/models")
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/petstore/rest/handlers")
 	prog, err := ldr.Load()
 	if err != nil {
 		log.Fatal(err)
@@ -81,7 +81,7 @@ func petstoreProgram() *loader.Program {
 func invalidProgram(name string) *loader.Program {
 	var ldr loader.Config
 	ldr.ParserMode = goparser.ParseComments
-	ldr.ImportWithTests("github.com/go-swagger/go-swagger/fixtures/goparsing/" + name)
+	ldr.ImportWithTests("github.com/ethanfrey/go-swagger/fixtures/goparsing/" + name)
 	prog, err := ldr.Load()
 	if err != nil {
 		log.Fatal(err)
@@ -129,9 +129,9 @@ func TestClassifierInclude(t *testing.T) {
 	prog := classificationProg
 	classifier := &programClassifier{
 		Includes: packageFilters([]packageFilter{
-			packageFilter{"github.com/go-swagger/go-swagger/fixtures/goparsing/classification"},
-			packageFilter{"github.com/go-swagger/go-swagger/fixtures/goparsing/classification/transitive/mods"},
-			packageFilter{"github.com/go-swagger/go-swagger/fixtures/goparsing/classification/operations"},
+			packageFilter{"github.com/ethanfrey/go-swagger/fixtures/goparsing/classification"},
+			packageFilter{"github.com/ethanfrey/go-swagger/fixtures/goparsing/classification/transitive/mods"},
+			packageFilter{"github.com/ethanfrey/go-swagger/fixtures/goparsing/classification/operations"},
 		}),
 	}
 	classified, err := classifier.Classify(prog)
@@ -157,7 +157,7 @@ func TestClassifierExclude(t *testing.T) {
 	prog := classificationProg
 	classifier := &programClassifier{
 		Excludes: packageFilters([]packageFilter{
-			packageFilter{"github.com/go-swagger/go-swagger/fixtures/goparsing/classification/transitive/mods"},
+			packageFilter{"github.com/ethanfrey/go-swagger/fixtures/goparsing/classification/transitive/mods"},
 		}),
 	}
 	classified, err := classifier.Classify(prog)

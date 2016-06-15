@@ -17,7 +17,7 @@ package generate
 import (
 	"errors"
 
-	"github.com/go-swagger/go-swagger/generator"
+	"github.com/ethanfrey/go-swagger/generator"
 )
 
 // Operation the generate operation files command

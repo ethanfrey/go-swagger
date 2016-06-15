@@ -14,7 +14,7 @@
 
 package generate
 
-import "github.com/go-swagger/go-swagger/generator"
+import "github.com/ethanfrey/go-swagger/generator"
 
 // Client the command to generate a swagger client
 type Client struct {

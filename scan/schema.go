@@ -692,7 +692,7 @@ func (scp *schemaParser) packageForSelector(gofile *ast.File, expr ast.Expr) (*l
 		pkg := scp.program.Package(selPath)
 		if pkg == nil {
 			// TODO: I must admit this made me cry, it's not even a great solution.
-			pkg = scp.program.Package("github.com/go-swagger/go-swagger/vendor/" + selPath)
+			pkg = scp.program.Package("github.com/ethanfrey/go-swagger/vendor/" + selPath)
 			if pkg == nil {
 				return nil, fmt.Errorf("no package found for %s", selPath)
 			}
