@@ -153,7 +153,7 @@ func (t *Repository) LoadDir(templatePath string) error {
 		if strings.HasSuffix(path, ".gotmpl") {
 			assetName := strings.TrimPrefix(path, templatePath)
 			if data, err := ioutil.ReadFile(path); err == nil {
-				t.AddFile(assetName, string(data))
+				t.addFile(assetName, string(data), true)
 			}
 		}
 		if err != nil {
