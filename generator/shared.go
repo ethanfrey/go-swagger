@@ -170,6 +170,11 @@ func writeToFile(target, name string, content []byte) error {
 	return writeFile(target, ffn, res)
 }
 
+func writeToTextFile(target, name, suffix string, content []byte) error {
+	ffn := stripTestFromFileName(name) + "." + suffix
+	return writeFile(target, ffn, content)
+}
+
 // func writeToTestFile(target, name string, content []byte) error {
 // 	ffn := swag.ToFileName(name)
 // 	if !strings.HasSuffix(ffn, "_test") {

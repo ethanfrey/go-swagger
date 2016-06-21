@@ -1,0 +1,6 @@
+{{ range .Properties }}
+| {{.Name}} 
+| {{ .SwaggerType }} {{ .SwaggerFormat }} 
+| {{ if .Required }}required{{ end }} 
+| {{ .Description }} {{ .Example }}
+{{ end }} 
