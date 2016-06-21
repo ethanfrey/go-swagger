@@ -2,6 +2,9 @@
 .{{ .Name }}
 |===
 | Property | Type | Required | Description
+{{ range .AllOf }}{{ range .Properties }}
+{{ template "schema" . }}
+{{ end }}{{ end }}
 {{ range .Properties }}
 {{ template "schema" . }}
 {{ end }}
