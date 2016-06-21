@@ -85,6 +85,8 @@ func GenerateDefinition(modelNames []string, includeModel, includeValidator bool
 			IncludeModel:     includeModel,
 			IncludeValidator: includeValidator,
 			DumpData:         opts.DumpData,
+			Suffix:           opts.TextSuffix,
+			OutputAsText:     opts.TextSuffix != "",
 		}
 
 		if err := generator.Generate(); err != nil {
@@ -104,6 +106,8 @@ type definitionGenerator struct {
 	IncludeValidator bool
 	Data             interface{}
 	DumpData         bool
+	Suffix           string
+	OutputAsText     bool
 }
 
 func (m *definitionGenerator) Generate() error {
@@ -145,6 +149,9 @@ func (m *definitionGenerator) generateModel() error {
 	}
 	log.Println("rendered model template:", m.Name)
 
+	if m.OutputAsText {
+		return writeToTextFile(m.Target, m.Name, m.Suffix, buf.Bytes())
+	}
 	return writeToFile(m.Target, m.Name, buf.Bytes())
 }
 

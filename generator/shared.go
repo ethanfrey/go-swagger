@@ -101,6 +101,7 @@ type GenOpts struct {
 	ExcludeSpec       bool
 	TemplateDir       string
 	WithContext       bool
+	TextSuffix        string // if not "", then output a text file with this suffix
 }
 
 // type generatorOptions struct {
