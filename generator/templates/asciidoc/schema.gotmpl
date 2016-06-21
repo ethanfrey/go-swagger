@@ -1,6 +1,4 @@
-{{ range .Properties }}
 | {{.Name}} 
-| {{ .SwaggerType }} {{ .SwaggerFormat }} 
+| {{ template "propertyType" . }}
 | {{ if .Required }}required{{ end }} 
 | {{ .Description }} {{ .Example }}
-{{ end }} 

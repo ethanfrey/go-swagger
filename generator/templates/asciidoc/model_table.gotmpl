@@ -1,0 +1,8 @@
+[[{{ .Name }}]]
+.{{ .Name }}
+|===
+| Property | Type | Required | Description
+{{ range .Properties }}
+{{ template "schema" . }}
+{{ end }}
+|===

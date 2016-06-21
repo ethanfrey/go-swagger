@@ -1,0 +1,9 @@
+{{- if .IsPrimitive -}}
+  {{ .SwaggerType }}
+{{- else if .IsArray -}}
+  []{{ template "propertyType" .Items }}
+{{- else if .IsComplexObject -}}
+  Remote: <<{{ snakize .GoType }}#{{ .GoType }},{{ .GoType}}>> Local: <<{{ .GoType }}>>
+{{- else -}}
+Unknown: {{ .SwaggerType }}
+{{- end -}}

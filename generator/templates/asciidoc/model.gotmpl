@@ -1,5 +1,5 @@
-.{{ .Name }}
-|===
-| Property | Type | Required | Description
-{{ template "schema" . -}}
-|===
+{{ template "modelTable" . }}
+
+{{ range .ExtraSchemas }}
+{{ template "modelTable" . }}
+{{ end }}
