@@ -24,6 +24,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	text_template "text/template"
 
 	"github.com/go-openapi/analysis"
 	"github.com/go-openapi/loads"
@@ -69,6 +70,7 @@ func GenerateDefinition(modelNames []string, includeModel, includeValidator bool
 		}
 	}
 
+	modelFiles := []string{}
 	for _, modelName := range modelNames {
 		// lookup schema
 		model, ok := specDoc.Spec().Definitions[modelName]
@@ -92,6 +94,24 @@ func GenerateDefinition(modelNames []string, includeModel, includeValidator bool
 		if err := generator.Generate(); err != nil {
 			return err
 		}
+		modelFiles = append(modelFiles, generator.outputFilename())
+	}
+	sort.Sort(sort.StringSlice(modelFiles))
+
+	// write index file
+	if opts.TextSuffix != "" {
+		buf := bytes.NewBuffer(nil)
+		data := struct{ Data []string }{modelFiles}
+
+		log.Printf("rendering index")
+		indexTemplate := text_template.Must(templates.Get("index"))
+		if err := indexTemplate.Execute(buf, data); err != nil {
+			return err
+		}
+		writeToTextFile(filepath.Join(opts.Target, opts.ModelPackage),
+			"index",
+			opts.TextSuffix,
+			buf.Bytes())
 	}
 
 	return nil
@@ -133,6 +153,11 @@ func (m *definitionGenerator) Generate() error {
 	log.Println("generated model", m.Name)
 
 	return nil
+}
+
+func (m *definitionGenerator) outputFilename() string {
+	ffn := stripTestFromFileName(m.Name) + "." + m.Suffix
+	return ffn
 }
 
 func (m *definitionGenerator) generateModel() error {

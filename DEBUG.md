@@ -24,5 +24,9 @@ go-bindata -pkg generator -nocompress templates/...
 
 Run for real:
 ```
+# to get some sample output, to work on schemas
 go run swagger.go generate markdown -f=${DOC}/params.yaml --template-dir=${TEMPLATES} -t=${TEMPLATES}/out --name=Location --dump-data
+
+# to generate proper code
+swagger generate markdown -f=${DOC}/outputs.yaml --template-dir=${TEMPLATES} -t=${TEMPLATES}/out -m=outputs --suffix=adoc
 ```
