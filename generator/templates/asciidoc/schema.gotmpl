@@ -1,4 +1,5 @@
 | {{.Name}} 
 | {{ template "propertyType" . }}
 | {{ if .Required }}required{{ end }} 
-| {{ .Description }} {{ .Example }}
+| {{ .Example }}
+| {{ .Description }} {{ if .Enum }}One of: {{ enumList .Enum }}{{end }}

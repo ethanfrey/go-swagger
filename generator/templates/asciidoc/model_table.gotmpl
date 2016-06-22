@@ -1,11 +1,11 @@
 [[{{ .Name }}]]
-.{{ .Name }}
+.{{ humanizeTitle .Name }}
 |===
-| Property | Type | Required | Description
+| Property | Type | Required | Example | Description
 {{ range .AllOf }}{{ range .Properties }}
 {{ template "schema" . }}
 {{ end }}{{ end }}
 {{ range .Properties }}
-{{ template "schema" . }}
+{{ if . }}{{ template "schema" . }}{{ end}}
 {{ end }}
 |===
