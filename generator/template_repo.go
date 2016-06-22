@@ -64,11 +64,20 @@ var FuncMap template.FuncMap = map[string]interface{}{
 
 		return swag.ToGoName("Nr " + arg)
 	},
-	"camelize":  swag.ToJSONName,
-	"varname":   swag.ToVarName,
-	"humanize":  swag.ToHumanNameLower,
-	"snakize":   swag.ToFileName,
-	"dasherize": swag.ToCommandName,
+	"camelize":      swag.ToJSONName,
+	"varname":       swag.ToVarName,
+	"humanize":      swag.ToHumanNameLower,
+	"humanizeTitle": swag.ToHumanNameTitle,
+	"snakize":       swag.ToFileName,
+	"dasherize":     swag.ToCommandName,
+	"enumList": func(arg []interface{}) string {
+		str := []string{}
+		for _, a := range arg {
+			// slow but safe...
+			str = append(str, fmt.Sprintf("%v", a))
+		}
+		return strings.Join(str, ", ")
+	},
 	"pluralizeFirstWord": func(arg string) string {
 		sentence := strings.Split(arg, " ")
 		if len(sentence) == 1 {
