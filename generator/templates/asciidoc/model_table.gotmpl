@@ -1,7 +1,7 @@
 [[{{ .Name }}]]
 .{{ humanizeTitle .Name }}
 |===
-| Property | Type | Required | Example | Description
+| Name | Type | Example | Required | Comment
 {{ range .AllOf }}{{ range .Properties }}
 {{ template "schema" . }}
 {{ end }}{{ end }}
